@@ -14,7 +14,7 @@ To set up your own assistant, you'll need to perform the steps below.
 
 - The [OpenAPI specification](nbp.openapi.json) for the National Bank of Poland can be used to set up the custom extension in your assistant. For our full docs on how to create and customize extensions, visit [Building a Custom Extension](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-build-custom-extension).
 - Import the [wxa-javascript-examples-action.json](wxa-javascript-examples-action.json) file located in the repository for this example into your assistant.
-- Modify the `integrationID`, `region`, `serviceInstanceID` and `subscriptionID` (only for enterprise accounts) in the `watsonAssistantChatOptions` used in this example to match those in the web chat embed code for your assistant.
+- Modify the `integrationID`, `region`, and `serviceInstanceID` within `app.js` to your assistant's information. This information can be found in your assistant instance under "Environments" -> "Web chat" -> "Embed".
 
 ### Installation
 
