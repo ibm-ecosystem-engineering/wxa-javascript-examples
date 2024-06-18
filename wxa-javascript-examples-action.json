@@ -1,0 +1,1483 @@
+{
+  "name": "Custom Component Alpha-action",
+  "type": "action",
+  "valid": true,
+  "status": "Available",
+  "created": "2024-06-11T18:57:52.021Z",
+  "updated": "2024-06-18T05:57:02.394Z",
+  "language": "en",
+  "skill_id": "73309089-25f7-4a44-acfb-9910154daa57",
+  "workspace": {
+    "actions": [
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_350",
+            "output": {
+              "generic": [
+                {
+                  "values": [],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "callout",
+              "callout": {
+                "path": "/api/exchangerates/rates/{table}/{code}/",
+                "type": "integration_interaction",
+                "method": "GET",
+                "internal": {
+                  "spec_hash_id": "4b90051f78a4d8cf3da3bd94c0b56d84a25d7d6fbe94d4b8a97ed9b8f32a9d56",
+                  "catalog_item_id": "6004c834-1e78-4f0f-9b2b-5961d5d4dbcb"
+                },
+                "request_mapping": {
+                  "path": [
+                    {
+                      "value": {
+                        "scalar": "A"
+                      },
+                      "parameter": "table"
+                    },
+                    {
+                      "value": {
+                        "skill_variable": "input_currency"
+                      },
+                      "parameter": "code"
+                    }
+                  ]
+                },
+                "result_variable": "step_350_result_1"
+              }
+            },
+            "variable": "step_350",
+            "next_step": "step_522"
+          },
+          {
+            "step": "step_522",
+            "output": {
+              "generic": [
+                {
+                  "values": [],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "user_defined": {
+                    "user_defined_type": "currency_exchange_output"
+                  },
+                  "response_type": "user_defined"
+                }
+              ]
+            },
+            "context": {
+              "variables": [
+                {
+                  "value": {
+                    "expression": "${step_350_result_1}.body.rates.get(0).mid"
+                  },
+                  "skill_variable": "output_exchange_rate"
+                },
+                {
+                  "value": {
+                    "expression": "T(Math).round(${input_amount} * ${output_exchange_rate} * 100) / 100.0"
+                  },
+                  "skill_variable": "output_amount"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_522"
+          }
+        ],
+        "title": "DO_EXCHANGE_CALCULATION",
+        "action": "action_11675",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_11675_intent_43589"
+        },
+        "variables": [
+          {
+            "title": "No response",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_350",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_350_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "No response",
+            "variable": "step_522",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "action_43645-2",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true
+        },
+        "disambiguation_opt_out": true
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_222",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Phone number filled!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "user_defined": {
+                    "user_defined_type": "fill_phone_number"
+                  },
+                  "response_type": "user_defined"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_222"
+          }
+        ],
+        "title": "Fill phone number",
+        "action": "action_16530",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_16530_intent_47264"
+        },
+        "variables": [
+          {
+            "title": "Phone number filled!",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_222",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_24008",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_396",
+            "output": {
+              "generic": [
+                {
+                  "title": "Dash PI - IFrame",
+                  "source": "https://wxa-ui-component-f5.z929zicbgpt.us-south.codeengine.appdomain.cloud/dashboard2/",
+                  "response_type": "iframe",
+                  "channel_options": {
+                    "chat": {
+                      "dimensions": {}
+                    }
+                  }
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_396"
+          }
+        ],
+        "title": "dashpi",
+        "action": "action_24008",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_24008_intent_12642"
+        },
+        "variables": [
+          {
+            "title": "",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_396",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_41209",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_951",
+            "output": {
+              "generic": [
+                {
+                  "values": [],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "user_defined": {
+                    "user_defined_type": "currency_exchange_input"
+                  },
+                  "response_type": "user_defined"
+                }
+              ]
+            },
+            "context": {
+              "variables": []
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_951"
+          }
+        ],
+        "title": "Exchange currency for Polish złoty",
+        "action": "action_24559",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_24559_intent_47528"
+        },
+        "variables": [
+          {
+            "title": "No response",
+            "variable": "step_951",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "action_11675",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_168",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Enter a value for Red Data:"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "I didn't catch that. Enter a number."
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "sys-number",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_168",
+            "next_step": "step_110"
+          },
+          {
+            "step": "step_110",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Enter a value for Blue Data:"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                }
+              ]
+            },
+            "context": {
+              "variables": [
+                {
+                  "value": {
+                    "variable": "step_168"
+                  },
+                  "skill_variable": "data_0"
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "I didn't catch that. Enter a number."
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "sys-number",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_110",
+            "next_step": "step_697"
+          },
+          {
+            "step": "step_697",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Enter a value for Purple Data:"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "I didn't catch that. Enter a number."
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "sys-number",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_697",
+            "next_step": "step_968"
+          },
+          {
+            "step": "step_968",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Data updated!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": [
+                {
+                  "value": {
+                    "variable": "step_168"
+                  },
+                  "skill_variable": "data_0"
+                },
+                {
+                  "value": {
+                    "variable": "step_110"
+                  },
+                  "skill_variable": "data_1"
+                },
+                {
+                  "value": {
+                    "variable": "step_697"
+                  },
+                  "skill_variable": "data_2"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_968"
+          }
+        ],
+        "title": "Modify parameters",
+        "action": "action_41209",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_41209_intent_40341"
+        },
+        "variables": [
+          {
+            "title": "Enter a value for Blue Data:",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_110",
+            "data_type": "number"
+          },
+          {
+            "title": "Enter a value for Red Data:",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_168",
+            "data_type": "number"
+          },
+          {
+            "title": "Enter a value for Purple Data:",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_697",
+            "data_type": "number"
+          },
+          {
+            "title": "Data updated!",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_968",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_43645",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_967",
+            "output": {
+              "generic": [
+                {
+                  "user_defined": {
+                    "chart_data": {
+                      "labels": [
+                        "Red",
+                        "Blue",
+                        "Yellow",
+                        "Green",
+                        "Purple"
+                      ],
+                      "values": [
+                        300,
+                        50,
+                        100,
+                        40,
+                        120
+                      ]
+                    },
+                    "user_defined_type": "pie_chart"
+                  },
+                  "response_type": "user_defined"
+                }
+              ]
+            },
+            "context": {
+              "variables": []
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_967"
+          }
+        ],
+        "title": "Make a pie chart",
+        "action": "action_43645",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_43645_intent_3455"
+        },
+        "variables": [
+          {
+            "title": "No response",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_967",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_48162",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_967",
+            "output": {
+              "generic": [
+                {
+                  "user_defined": {
+                    "chart_data": {
+                      "labels": [
+                        "Red",
+                        "Blue",
+                        "Yellow",
+                        "Green",
+                        "Purple"
+                      ],
+                      "values": [
+                        300,
+                        50,
+                        100,
+                        40,
+                        120
+                      ]
+                    },
+                    "user_defined_type": "doughnut_chart"
+                  },
+                  "response_type": "user_defined"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_967"
+          }
+        ],
+        "title": "Make a doughnut chart",
+        "action": "action_43645-2",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_43645_intent_3455-2"
+        },
+        "variables": [
+          {
+            "title": "",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_967",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_43645-3",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_967",
+            "output": {
+              "generic": [
+                {
+                  "user_defined": {
+                    "chart_data": {
+                      "labels": [
+                        "Red",
+                        "Blue",
+                        "Yellow",
+                        "Green",
+                        "Purple"
+                      ],
+                      "values": [
+                        300,
+                        50,
+                        100,
+                        40,
+                        120
+                      ]
+                    },
+                    "user_defined_type": "bar_chart"
+                  },
+                  "response_type": "user_defined"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_967"
+          }
+        ],
+        "title": "Make a bar chart",
+        "action": "action_43645-3",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_43645_intent_3455-3"
+        },
+        "variables": [
+          {
+            "title": "",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_967",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "fallback",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_840",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Phone number updated!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_840"
+          }
+        ],
+        "title": "Updating phone number...",
+        "action": "action_44996",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_44996_intent_33614"
+        },
+        "variables": [
+          {
+            "title": "Phone number updated!",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_840",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_16530",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_601",
+            "output": {
+              "generic": [
+                {
+                  "user_defined": {
+                    "carousel_data": [
+                      {
+                        "alt": "everyday card",
+                        "url": "lendyr-everyday-card.jpg",
+                        "title": "The Everyday Card",
+                        "description": "$300 bonus plus 5% gas station cash back offer. Earn 2% cash back on all other purchases."
+                      },
+                      {
+                        "alt": "preferred card",
+                        "url": "lendyr-preferred-card.jpg",
+                        "title": "The Preferred Card",
+                        "description": "$300 bonus plus 5% gas station cash back offer. Earn 5% cash back on all other purchases."
+                      },
+                      {
+                        "alt": "topaz card",
+                        "url": "lendyr-topaz-card.jpg",
+                        "title": "The Topaz Card",
+                        "description": "$90 Annual fee. Earn 120,000 bonus points. Earn additional points on every purchase."
+                      }
+                    ],
+                    "user_defined_type": "carousel"
+                  },
+                  "response_type": "user_defined"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_601"
+          }
+        ],
+        "title": "Show a carousel",
+        "action": "action_48162",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_48162_intent_42411"
+        },
+        "variables": [
+          {
+            "title": "No response",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_601",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_24559",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_001",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "I'm afraid I don't understand. Please rephrase your question."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_001",
+            "condition": {
+              "lte": [
+                {
+                  "system_variable": "no_action_matches_count"
+                },
+                {
+                  "scalar": 3
+                }
+              ]
+            },
+            "next_step": "step_002"
+          },
+          {
+            "step": "step_002",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "fallback",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_002_result_1"
+              }
+            },
+            "variable": "step_002",
+            "condition": {
+              "gt": [
+                {
+                  "system_variable": "no_action_matches_count"
+                },
+                {
+                  "scalar": 3
+                }
+              ]
+            }
+          }
+        ],
+        "title": "No action matches",
+        "action": "anything_else",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "expression": "anything_else"
+        },
+        "variables": [
+          {
+            "title": "I am afraid I do not understand what you are asking, please re-p",
+            "variable": "step_001",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_002",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_002_result_1",
+            "data_type": "any"
+          }
+        ],
+        "disambiguation_opt_out": true
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_001",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "I'm afraid I don't understand. I can connect you to an agent."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Let's send you to an available agent."
+                },
+                "agent_unavailable": {
+                  "message": "There are no agents available at this time. When one becomes available, we'll connect you."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_001",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "Step validation failed"
+                }
+              ]
+            },
+            "next_step": "step_002"
+          },
+          {
+            "step": "step_002",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Sorry I couldn't assist you. I will connect you to an agent right away."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Let's send you to an available agent."
+                },
+                "agent_unavailable": {
+                  "message": "There are no agents available at this time. When one becomes available, we'll connect you."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_002",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "Agent requested"
+                }
+              ]
+            },
+            "next_step": "step_003"
+          },
+          {
+            "step": "step_003",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "I am afraid I do not understand what you are asking, let me connect you to an agent."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Let's send you to an available agent."
+                },
+                "agent_unavailable": {
+                  "message": "There are no agents available at this time. When one becomes available, we'll connect you."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_003",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "No action matches"
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Fallback",
+        "action": "fallback",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "fallback_connect_to_agent"
+        },
+        "variables": [
+          {
+            "title": "I'm afraid I don't understand. I can connect you to an agent.",
+            "variable": "step_001",
+            "data_type": "any"
+          },
+          {
+            "title": "Sorry I couldn't assist you. I will connect you to an agent righ",
+            "variable": "step_002",
+            "data_type": "any"
+          },
+          {
+            "title": "I am afraid I do not understand what you are asking, let me conn",
+            "variable": "step_003",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "anything_else",
+        "disambiguation_opt_out": true
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_001",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Welcome, how can I assist you?"
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_001"
+          }
+        ],
+        "title": "Greet customer",
+        "action": "welcome",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "expression": "welcome"
+        },
+        "variables": [
+          {
+            "variable": "step_001",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "action_44996",
+        "disambiguation_opt_out": true
+      }
+    ],
+    "intents": [
+      {
+        "intent": "action_11675_intent_43589",
+        "examples": [
+          {
+            "text": "DO_EXCHANGE_CALCULATION"
+          }
+        ]
+      },
+      {
+        "intent": "action_16530_intent_47264",
+        "examples": [
+          {
+            "text": "Fill phone number"
+          }
+        ]
+      },
+      {
+        "intent": "action_24008_intent_12642",
+        "examples": [
+          {
+            "text": "dashpi"
+          }
+        ]
+      },
+      {
+        "intent": "action_24559_intent_47528",
+        "examples": [
+          {
+            "text": "Exchange currency for Polish złoty"
+          },
+          {
+            "text": "I would like to do a currency exchange"
+          }
+        ]
+      },
+      {
+        "intent": "action_41209_intent_40341",
+        "examples": [
+          {
+            "text": "Modify parameters"
+          }
+        ]
+      },
+      {
+        "intent": "action_43645_intent_3455",
+        "examples": [
+          {
+            "text": "Make a pie chart"
+          }
+        ]
+      },
+      {
+        "intent": "action_43645_intent_3455-2",
+        "examples": [
+          {
+            "text": "Make a doughnut chart"
+          }
+        ]
+      },
+      {
+        "intent": "action_43645_intent_3455-3",
+        "examples": [
+          {
+            "text": "Make a bar chart"
+          }
+        ]
+      },
+      {
+        "intent": "action_44996_intent_33614",
+        "examples": [
+          {
+            "text": "Updating phone number..."
+          }
+        ]
+      },
+      {
+        "intent": "action_48162_intent_42411",
+        "examples": [
+          {
+            "text": "Show a carousel"
+          }
+        ]
+      },
+      {
+        "intent": "fallback_connect_to_agent",
+        "examples": [
+          {
+            "text": "Agent help"
+          },
+          {
+            "text": "Call agent"
+          },
+          {
+            "text": "Can I connect to an agent?"
+          },
+          {
+            "text": "I would like to speak to a human"
+          },
+          {
+            "text": "I would like to speak to someone"
+          }
+        ],
+        "description": "Please transfer me to an agent"
+      }
+    ],
+    "entities": [
+      {
+        "entity": "sys-date",
+        "values": []
+      },
+      {
+        "entity": "sys-number",
+        "values": []
+      },
+      {
+        "entity": "sys-time",
+        "values": []
+      }
+    ],
+    "metadata": {
+      "skill": {
+        "counts": {
+          "actions": 6,
+          "intents": 4,
+          "entities": 3,
+          "data_types": 0,
+          "collections": 0,
+          "global_variables": 4
+        }
+      },
+      "api_version": {
+        "major_version": "v2",
+        "minor_version": "2018-11-08"
+      }
+    },
+    "variables": [
+      {
+        "title": "data_red",
+        "privacy": {
+          "enabled": false
+        },
+        "variable": "data_0",
+        "data_type": "any",
+        "description": "",
+        "initial_value": {
+          "scalar": "75"
+        }
+      },
+      {
+        "title": "data_blue",
+        "privacy": {
+          "enabled": false
+        },
+        "variable": "data_1",
+        "data_type": "any",
+        "description": "",
+        "initial_value": {
+          "scalar": "50"
+        }
+      },
+      {
+        "title": "data_purple",
+        "privacy": {
+          "enabled": false
+        },
+        "variable": "data_2",
+        "data_type": "any",
+        "description": "",
+        "initial_value": {
+          "scalar": "100"
+        }
+      },
+      {
+        "title": "input_amount",
+        "variable": "input_amount",
+        "data_type": "number",
+        "description": ""
+      },
+      {
+        "title": "input_currency",
+        "variable": "input_currency",
+        "data_type": "any",
+        "description": ""
+      },
+      {
+        "title": "output_amount",
+        "variable": "output_amount",
+        "data_type": "any",
+        "description": ""
+      },
+      {
+        "title": "output_exchange_rate",
+        "variable": "output_exchange_rate",
+        "data_type": "number",
+        "description": ""
+      },
+      {
+        "title": "phone_number",
+        "privacy": {
+          "enabled": false
+        },
+        "variable": "phone_number",
+        "data_type": "any",
+        "description": "",
+        "initial_value": {
+          "scalar": "555-555-5555"
+        }
+      }
+    ],
+    "data_types": [],
+    "collections": [],
+    "counterexamples": [],
+    "system_settings": {
+      "topic_switch": {
+        "enabled": true,
+        "messages": {}
+      },
+      "disambiguation": {
+        "prompt": "Did you mean:",
+        "enabled": true,
+        "randomize": true,
+        "max_suggestions": 5,
+        "suggestion_text_policy": "title",
+        "none_of_the_above_prompt": "None of the above"
+      },
+      "intent_classification": {
+        "training_backend_version": "v2"
+      },
+      "spelling_auto_correct": true
+    },
+    "learning_opt_out": true
+  },
+  "description": "created for assistant 4bd35064-38e3-408a-9363-1fd029574975",
+  "assistant_id": "0ef8d54f-8644-43b9-87b9-2ff8af7dca4c",
+  "workspace_id": "73309089-25f7-4a44-acfb-9910154daa57",
+  "dialog_settings": {},
+  "next_snapshot_version": "20",
+  "environment_id": "340088ab-de8d-44ef-846b-30ead19a6a4c"
+}
