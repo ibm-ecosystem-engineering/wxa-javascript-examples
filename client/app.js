@@ -51,9 +51,7 @@ async function webChatOnLoad(instance) {
     form2Container.innerHTML = form2HTML;
     document.body.appendChild(form2Container);
 
-    // Add event listener to the button
-    const button = form2Container.querySelector(".Input.Button");
-    button.addEventListener("click", () => {
+    const sendCommand = () => {
       const wxaCommand = form2Container.querySelector(".wxa-command").value;
       if (instance) {
         const message = {
@@ -62,6 +60,16 @@ async function webChatOnLoad(instance) {
           },
         };
         instance.send(message);
+      }
+    };
+
+    const button = form2Container.querySelector(".Input.Button");
+    button.addEventListener("click", sendCommand);
+
+    const inputField = form2Container.querySelector(".wxa-command");
+    inputField.addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+        sendCommand();
       }
     });
   }
